@@ -1,0 +1,14 @@
+{
+  "name": "webproject",
+  "version": "1.0.0",
+  "description": "for homework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mashiro",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.17.1"
+  }
+}

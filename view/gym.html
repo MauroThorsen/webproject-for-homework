@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <link rel="shortcut icon" href="../../../Desktop/webproject/public/ico/ooopic_1560300857.ico">
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <style>
+        .blank {
+            width: 100%;
+            height: 100px;
+        }
+
+        .under {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14pt;
+        }
+    </style>
+    <script>
+        var url = window.location.href;
+        var uid = url.slice(url.indexOf("?") + 5, url.indexOf("?") + 6);
+        var gid = url.slice(url.indexOf("&") + 4);
+        $("#nav-search").attr("href", "search.html?uid=" + uid);
+        $("#nav-backer").attr("href", "backer.html?uid=" + uid);
+        $("#backer").attr("href", "backer.html?uid=" + uid);
+        if (uid != 0 && uid != 1 && uid != 2) {
+            alert("身份信息出错，请重新登录");
+            location.href = "index.html";
+        }
+        $.ajax({
+            url: "http://localhost:3000/gym-list?id=" + gid,
+            dataType: "jsonp",
+            jsonp: "callback",
+            jsonpCallback: "success_jsonpCallback"
+        }).done(function (data) {
+
+            $("#pic1").attr("src", data.pic1);
+            $("#pic2").attr("src", data.pic2);
+            $("#H1").text(data.H1);
+            $("#H2").text(data.H2);
+            $("#int1").text(data.int1);
+            $("#int2").text(data.int2);
+            $("a[name='link1']").attr("href", "gym.html?uid=2&id=" + data.gid1);
+            $("a[name='link2']").attr("href", "gym.html?uid=2&id=" + data.gid2);
+            $("#summary").text(data.summary);
+            $("#gname").text(data.gname);
+            $("#gymH").text(data.gname);
+            $("#pic").attr("src", data.pic);
+            $("#address").text(data.address);
+            $("#close").text(data.close);
+            $("#open").text(data.open);
+            $("#price").text(data.price);
+            $("#type").text(data.type);
+            $("#sum").text(data.sum);
+            $("#hoeToGo").text(data.howtogo);
+        });
+
+    </script>
+</head>
+
+<body style="background: url(C:\\Users\\11397\\Desktop\\webproject\\public\\img\\11.jpg)">
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <nav class="navbar navbar-default" style="width: 60%;margin-left: auto;margin-right: auto;">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="" id="nav-search">search</a></li>
+                    <li class="active"><a href="" id="nav-backer">backer</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="about.html">about</a></li>
+                    <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="width: 60% ;color:rgb(111, 164, 148);">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="gymName">这是场馆名</div>
+                    <div class="panel-body">
+                        <div class="container-fluid">
+                            <div class="col-lg-7">
+                                <div class="thumbnail">
+                                    <img src="" alt="场馆图片" id="pic">
+                                </div>
+                            </div>
+                            <div class="col-lg-5" id="Information">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h4 class="media-heading" id="gymH">场馆名</h4><br>
+                                        <section>
+                                            位置：<span id="address"></span><br><br>
+                                            营业时间：<span id="open">10:00</span>~<span id="close">22:00</span><br><br>
+                                            均价：<span id="price">100</span>元<br><br>
+                                            场馆规模：<span id="sum">50</span>桌<br><br>
+                                            类型：<span id="type">室内场</span><br><br>
+                                            公交：<span id="howToGO">顶顶顶顶顶顶顶</span>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">场馆介绍</div>
+                    <div class="panel-body" id="summary">
+
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">场馆预约</div>
+                    <div class="panel-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="thumbnail">
+                                        <img src="../public/img/3.jpg">
+                                        <div class="caption">
+                                            <h3 id="cid1">二号桌</h3>
+                                            <p>价格<span id="price1">50</span><br>时长<span id="time1">01：00：00</span></p>
+                                            <button class="btn btn-primary" id="order1">Button</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="thumbnail">
+                                        <img src="../public/img/3.jpg">
+                                        <div class="caption">
+                                            <h3 id="cid1">一号桌</h3>
+                                            <p>价格<span id="price1">50</span><br>时长<span id="time1">01：00：00</span></p>
+                                            <button class="btn btn-primary" id="order2">Button</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="thumbnail">
+                                        <img src="../public/img/3.jpg">
+                                        <div class="caption">
+                                            <h3 id="cid1">三号桌</h3>
+                                            <p>价格<span id="price1">50</span><br>时长<span id="time1">01：00：00</span></p>
+                                            <button class="btn btn-primary" id="order3">Button</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="myModal" class="modal">
+                                    <!-- 弹窗内容 -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <span class="close glyphicon glyphicon-remove"></span>
+                                            <h2>请输入要添加的场馆信息</h2>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="sizing-id">球场号</span>
+                                                    <input type="text" class="form-control" placeholder="cid"
+                                                        aria-describedby="sizing-id" id="cid">
+                                                </div>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="sizing-time">时长</span>
+                                                    <input type="text" class="form-control" placeholder="time"
+                                                        aria-describedby="sizing-time" id="time">
+                                                </div>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="sizing-price">价格</span>
+                                                    <input type="text" class="form-control" placeholder="Price"
+                                                        aria-describedby="sizing-price" id="price">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button id="insert">提交</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="container-fluid">
+                    <h4 style="margin-left: auto; margin-right:auto; text-align:center;">
+                        推荐场馆</h4>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="thumbnail">
+                                <img src="" alt="图片未加载" id="pic1">
+                                <div class="caption">
+                                    <h3 id="H1"></h3>
+                                    <p id="int1"></p>
+                                    <p><a href="" class="btn btn-primary" name="link1" role="button">去预约</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="thumbnail">
+                                <img src="" alt="图片未加载" id="pic2">
+                                <div class="caption">
+                                    <h3 id="H2"></h3>
+                                    <p id="int2"></p>
+                                    <p><a href="" class="btn btn-primary" role="button" name="link2">去预约</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-default navbar-fixed-bottom" style="background-color: rgb(145, 141, 138);">
+        <div class="container" style="text-align: center;margin-top: 10px;font-size: 14pt;">
+            <a href="about_us.html">关于我们</a><span>|</span>
+            <a href="http://www.dongsport.com/">友情链接</a><span>|</span>
+            <a href="http://www.dongsport.com/">更多场馆</a><span>|</span>
+            <a target="_blank" href="" id="backer">后台管理</a>
+            <br>乒乓球场馆预定系统
+            <span>|</span>客服电话：010-12345678 </div>
+    </nav>
+    <script>
+        var url = window.location.href;
+        var uid = url.slice(url.indexOf("?") + 5, url.indexOf("?") + 6);
+        var gid = url.slice(url.indexOf("&") + 4);
+        $("#nav-search").attr("href", "search.html?uid=" + uid);
+        $("#nav-backer").attr("href", "backer.html?uid=" + uid);
+        $("#backer").attr("href", "backer.html?uid=" + uid);
+        $("#order1").click(() => {
+            alert("是否要预约一号桌");
+            $.ajax({
+                url: "http://localhost:3000/orderin?gid=" + gid + "&cid=1&uid=" + uid,
+                type: "POST",
+                success: function (res) {
+                    alert("预约成功")
+                }
+            })
+        })
+        $("#order2").click(() => {
+            alert("是否要预约二号桌");
+            $.ajax({
+                url: "http://localhost:3000/orderin?gid=" + gid + "&cid=2&uid=" + uid,
+                type: "POST",
+                success: function (res) {
+                    alert("预约成功")
+                }
+            })
+        })
+        $("#order3").click(() => {
+            alert("是否要预约三号桌");
+            $.ajax({
+                url: "http://localhost:3000/orderin?gid=" + gid + "&cid=3&uid=" + uid,
+                type: "POST",
+                success: function (res) {
+                    alert("预约成功")
+                }
+            })
+        })
+        $("#new").click(() => {
+            if (uid == 1) {
+                alert("权限不足，尝试重新登录");
+                return;
+            }
+            else {
+                location.href = "backer.html?uid=0";
+            }
+        })
+    </script>
+</body>
+
+</html>

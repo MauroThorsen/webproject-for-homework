@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>场馆预定系统</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="../../../Desktop/webproject/public/ico/ooopic_1560300857.ico" />
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" />
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+</head>
+
+<body style="background: url(C:\\Users\\11397\\Desktop\\webproject\\public\\img\\login.jpg)">
+    <!--[if lt IE 7]>
+            <p class="browsehappy">
+                You are using an <strong>outdated</strong> browser. Please
+                <a href="#">upgrade your browser</a> to improve your experience.
+            </p>
+        <![endif]-->
+    <div class="blank"></div>
+    <div class="container" style="width: 90%">
+        <div class="row">
+            <div class="col-lg-4"></div>
+        </div>
+    </div>
+    <div style=" width: 100%;height: 400px;"></div>
+    <div class="container" style="width: 90%">
+        <div class="row">
+            <div class="col-lg-4">
+                <div style="color: rgb(254, 218, 148)">
+                    <h1>Hi,Welcome!</h1>
+                    <p style="font-weight: 900">
+                        这是一个简单的乒乓球场馆预定系统
+                    </p>
+                    <p>
+                        <a class="btn btn-primary btn-lg" href="#" role="button" id="preview">预览一下</a>
+                    </p>
+                    <script>
+                        $("#preview").click(() => {
+                            location.href =
+                                "gym.html?uid=2&id=" +
+                                parseInt(Math.random() * 3 + 1);
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4" style="color: white">
+                <div class="login">
+                    <div class="container-fluid" style="text-align: center">
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
+                            <h3 id="signHead">欢迎登录</h3>
+                        </div>
+                        <div class="col-lg-2"></div>
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon">用户名</span>
+                        <input type="text" class="form-control" placeholder="Username" id="user" />
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon">密&nbsp;&nbsp;&nbsp;&nbsp;码</span>
+                        <input type="text" class="form-control" placeholder="password" id="password" />
+                    </div>
+                    <br />
+                    <div class="container-fluid" style="margin-left: auto;margin-right:auto;">
+                        <div class="col-lg-5"></div>
+                        <div class="col-lg-7">
+                            <button class="btn btn-primary btn-lg" type="button" id="login">
+                                登录</button><br />
+                        </div>
+                    </div>
+                    <div class="container-fluid" style="text-align: center">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <a style="color:#fff; text-decoration: none;">忘了密码</a>
+                            </div>
+                            <div class="col-lg-6">
+                                <a style="color:#fff; text-decoration: none;" id="signUp">注册</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-default navbar-fixed-bottom" style="background-color: rgb(145, 141, 138);">
+        <div class="container" style="text-align: center;margin-top: 10px;font-size: 14pt;">
+            <a href="about_us.html">关于我们</a><span>|</span>
+            <a href="http://www.dongsport.com/">友情链接</a><span>|</span>
+            <a href="http://www.dongsport.com/">更多场馆</a><span>|</span>
+            <a target="_blank" href="">后台管理</a>
+            <br />乒乓球场馆预定系统 <span>|</span>客服电话：010-12345678
+        </div>
+    </nav>
+    <script src="../../../Desktop/webproject/public/javascript/sign.js"></script>
+</body>
+
+</html>

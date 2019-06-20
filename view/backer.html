@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>backer.html</title>
+    <link rel="shortcut icon" href="../../../Desktop/webproject/public/ico/ooopic_1560300857.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../public/stylesheet/backer_css.css">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script>
+        var url = window.location.href;
+        var uid = url.slice(url.indexOf("?") + 5, url.indexOf("?") + 6);
+        if (uid != 0 && uid != 1) {
+            alert("身份信息出错，请重新登录");
+            location.href = "index.html";
+        }
+        $.ajax({
+            url: "http://localhost:3000/getdata",
+            dataType: "jsonp",
+            jsonp: "callback",
+            jsonpCallback: "success_jsonpCallback"
+        }).done(function (data) {
+            for (let i = 0; i < data.num; i++) {
+                $("#in").after("<tr><td>" + data["gid" + i] + "</td><td>" + data["gname" + i] + "</td><td>" + data["place" + i] + "</td><td>" + data["price" + i] + "</td></tr>")
+            }
+        });
+    </script>
+</head>
+
+<body style="background: url(C:\\Users\\11397\\Desktop\\webproject\\public\\img\\login.jpg)">
+    <nav class="navbar navbar-default" style="width: 60%;margin-left: auto;margin-right: auto;">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="search.html">search</a></li>
+                    <li class="active"><a href="" id="backer">backer <span class="sr-only">(current)</span></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="about.html">about</a></li>
+                    <li><a href="index.html><span class="glyphicon glyphicon-log-out"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div style="width: 100%;height: 100px"></div>
+    <div style="width: 60%;margin-left: auto;margin-right: auto;background-color: rgb(238,238,238) ;">
+        <table class="table table-bordered table-striped">
+            <caption>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="font-size: 18pt;color: black">管理乒乓球场馆信息</span>
+                <button id="myBtn" class="btn btn-primary" style="float: right;margin-right: 20px">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <button id="Btn" class="btn btn-primary" style="float: right;margin-right: 20px">
+                    <span class="glyphicon glyphicon-minus"></span>
+                </button>
+                <div id="myModal" class="modal">
+                    <!-- 弹窗内容 -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span class="close glyphicon glyphicon-remove"></span>
+                            <h2>请输入要添加的场馆信息</h2>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="sizing-Name">场馆名</span>
+                                    <input type="text" class="form-control" placeholder="Name"
+                                        aria-describedby="sizing-Name" id="name">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="sizing-address">地址</span>
+                                    <input type="text" class="form-control" placeholder="address"
+                                        aria-describedby="sizing-address" id="address">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="sizing-time">营业时间</span>
+                                    <input type="text" class="form-control" placeholder="time"
+                                        aria-describedby="sizing-time" id="time">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="sizing-sum">球场数量</span>
+                                    <input type="text" class="form-control" placeholder="sum"
+                                        aria-describedby="sizing-sum" id="sum">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="sizing-price">均价</span>
+                                    <input type="text" class="form-control" placeholder="price"
+                                        aria-describedby="sizing-price" id="price">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="sizing-type">类型</span>
+                                    <input type="text" class="form-control" placeholder="type"
+                                        aria-describedby="sizing-type" id="type">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="sizing-summary">简介</span>
+                                    <input type="text" class="form-control" placeholder="summary"
+                                        aria-describedby="sizing-summary" id="summary">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="insert">提交</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="Modal" class="modal">
+                    <!-- 弹窗内容 -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span class="delclose glyphicon glyphicon-remove"></span>
+                            <h2>请输入要删除的场馆ID</h2>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="sizing-ID">场馆名ID</span>
+                                    <input type="text" class="form-control" placeholder="GID"
+                                        aria-describedby="sizing-ID" id="gid">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="del">删除</button>
+                        </div>
+                    </div>
+                </div>
+            </caption>
+            <thead>
+                <tr>
+                    <th id="head1">ID</th>
+                    <th id="head2">场馆名</th>
+                    <th id="head3">地区</th>
+                    <th id="head4">平均价格</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="in"></tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom" style="background-color: rgb(145, 141, 138);">
+        <div class="container" style="text-align: center;margin-top: 10px;font-size: 14pt;">
+            <a href="about_us.html">关于我们</a><span>|</span>
+            <a href="http://www.dongsport.com/">友情链接</a><span>|</span>
+            <a href="http://www.dongsport.com/">更多场馆</a><span>|</span>
+            <a target="_blank" href="backer.html">后台管理</a>
+            <br>乒乓球场馆预定系统
+            <span>|</span>客服电话：010-12345678 </div>
+    </nav>
+    <script>
+
+        $(() => {
+            $("#myBtn").click(() => {
+                $('#myModal').css("display", "block");
+            });
+            $("#Btn").click(() => {
+                $('#Modal').css("display", "block");
+            });
+            $(".close").click(() => {
+                $('#Modal').css("display", "none");
+            });
+            $(".delclose").click(() => {
+                $('#Modal').css("display", "none");
+            });
+            $("#del").click(() => {
+                alert("确认要删除ID="+$("#gid").val()+"的场馆吗");
+                $.ajax({
+                    url: "http://localhost:3000/delGym?gid="+$("#gid").val(),
+                    type: "POST",
+                    success: function (res) {
+                        var gid = parseInt(res);
+                        alert("更改成功，即将刷新页面");
+                        location.href = "backer.html?uid=0";
+                    },
+                    error: function (res) {
+                    }
+                })
+            });
+            $("#insert").click(() => {
+                if ($("#name").val() == "" || $("#address").val() == "" || $("#price").val() == "" || $("#sum").val() == "" || ($("#type").val() == "")) {
+                    alert("请补全场馆名，地址，球场数量，球场类型和均价");
+                    return;
+                }
+                alert("请确认信息：\n场馆名：" + $("#name").val() + "\n地址" + $("#address").val() + "\n球场数量" + $("#sum").val() + "\n类型" + $("#type").val() + "\n均价" + $("#price").val() + "\n\n按确认提价更改");
+                $.ajax({
+                    url: "http://localhost:3000/insertGym",
+                    type: "POST",
+                    data: {
+                        gname: $("#name").val(),
+                        address: $("#address").val(),
+                        sum: $("#sum").val(),
+                        type: $("#type").val(),
+                        price: $("#price").val(),
+                        summary: $("#summary").val(),
+                    },
+                    success: function (res) {
+                        var gid = parseInt(res);
+                        alert("更改成功，即将跳转进入具体场馆页面");
+                        location.href = "gym.html?uid=0&id=" + gid;
+                    },
+                    error: function (res) {
+
+                    }
+                })
+            })
+        });
+
+    </script>
+    <nav class="navbar navbar-default navbar-fixed-bottom" style="background-color: rgb(145, 141, 138);">
+        <div class="container" style="text-align: center;margin-top: 10px;font-size: 14pt;">
+            <a href="about_us.html">关于我们</a><span>|</span>
+            <a href="http://www.dongsport.com/">友情链接</a><span>|</span>
+            <a href="http://www.dongsport.com/">更多场馆</a><span>|</span>
+            <a target="_blank" href="backer.html">后台管理</a>
+            <br>乒乓球场馆预定系统
+            <span>|</span>客服电话：010-12345678 </div>
+    </nav>
+</body>
+
+</html>

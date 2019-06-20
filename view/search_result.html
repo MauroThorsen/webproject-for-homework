@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>search_result.html</title>
+    <meta name="description" content="">
+    <meta http-equiv="Content-Type" content="text/html;charset=gbk">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="../../../Desktop/webproject/public/ico/ooopic_1560300857.ico">
+    <link rel="stylesheet" href="">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../public/stylesheet/search.css">
+    <script>
+        function find(str, cha, num) {
+            var x = str.indexOf(cha);
+            for (var i = 0; i < num; i++) {
+                x = str.indexOf(cha, x + 1);
+            }
+            return x;
+        }
+        $(function () {
+            var url = decodeURIComponent(window.location.href);
+            console.log(url);
+            var uid = url.slice(url.indexOf("?") + 5, url.indexOf("?") + 6);
+            var type = url.slice(url.indexOf("&") + 6, find(url, "&", 1));
+            var keyword = url.slice(find(url, "&", 1) + 1);
+            $("#backer").attr("href", "backer.html?uid=" + uid);
+            $.ajax({
+                url: "http://localhost:3000/search?type=" + type + "&" + keyword,
+                dataType: "jsonp",
+                jsonp: "callback",
+                jsonpCallback: "success_jsonpCallback"
+            }).done(function (data) {
+                for (let i = 0; i < data.num; i++) {
+                    var str = data["summary" + i].slice(0, 180);
+                    str = str + "...";
+                    $("<div id=result" + i + 1 + "><h3><a href=gym.html?uid=" + uid + "&id=" + data["gid" + i] + ">" + data["gname" + i] + "</a></h3><section>详细地址:" + data["address" + i] + "      营业时间：" + data["open" + i] + "~" + data["close" + i] + "<br>" + str + "</section></div><br>").appendTo("#result" + 1).attr("class", "searchResult");
+                }
+            })
+        })
+    </script>
+</head>
+
+<body style="background: url(C:\\Users\\11397\\Desktop\\webproject\\public\\img\\11.jpg)">
+    <nav class="navbar navbar-default" style="width: 60%;margin-left: auto;margin-right: auto;">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="active"><a href="search.html">search <span class="sr-only">(current)</span></a></li>
+                    <li><a href="" id="backer">backer</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="about.html">about</a></li>
+                    <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="width:60%;margin-right: auto;margin-left: auto;">
+        <div style="width: 80%;margin-left: auto;margin-right: auto;">
+            <div class="input-group">
+                <input type="text" class="form-control input-lg" placeholder="Search for..." id="text">
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-lg" type="button" id="search">Go!</button>
+                </span>
+            </div>
+            <br>
+            <!--搜索条件-->
+            <form>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label>搜索通过：</label>
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="radio" name="select" id="place">地区
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="radio" name="select" id="price">最高价
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="radio" name="select" id="name">场馆名
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="radio" name="select" id="type">类型
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br>
+        <div id=result1>
+        </div><br>
+    </div>
+    <nav class="navbar navbar-default navbar-fixed-bottom" style="background-color: rgb(145, 141, 138);">
+        <div class="container" style="text-align: center;margin-top: 10px;font-size: 14pt;">
+            <a href="about_us.html">关于我们</a><span>|</span>
+            <a href="http://www.dongsport.com/">友情链接</a><span>|</span>
+            <a href="http://www.dongsport.com/">更多场馆</a><span>|</span>
+            <a target="_blank" href="" id="backer">后台管理</a>
+            <br>乒乓球场馆预定系统
+            <span>|</span>客服电话：010-12345678 </div>
+    </nav>
+    </div>
+    </div>
+    <script>
+
+
+    </script>
+</body>
+
+</html>
